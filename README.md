@@ -4,17 +4,15 @@ This repository contains a small application that consumes test score data and e
 
 #### About the application
 
-The application consumes data from `http://live-test-scores.herokuapp.com/scores`, using the [Server-Sent Events](https://www.w3.org/TR/2015/REC-eventsource-20150203/) protocol and stores teh results in memory.
+The application consumes data from `http://live-test-scores.herokuapp.com/scores`, using the [Server-Sent Events](https://www.w3.org/TR/2015/REC-eventsource-20150203/) protocol and stores the results in memory.
 This means that there is no data on start up, and test scores will stream in over time.
 
 The data is exposed via the following REST API:
 
-1. `/api/v1/students` lists all users that have received at least one test score
+1. `/api/v1/students` lists all students that have received at least one test score
 2. `/api/v1/students/{id}` lists the test results for the specified student, and provides the student's average score across all exams
 3. `/api/v1//exams` lists all the exams that have been recorded
 4. `/api/v1/exams/{number}` lists all the results for the specified exam, and provides the average score across all students
-
-Coding tests are often contrived, and this exercise is no exception. To the best of your ability, make your solution reflect the kind of code you'd want shipped to production. A few things we're specifically looking for:
 
 #### Extending the application
 
