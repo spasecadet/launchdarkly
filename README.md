@@ -11,7 +11,7 @@ The data is exposed via the following REST API:
 
 1. `/api/v1/students` lists all students that have received at least one test score
 2. `/api/v1/students/{id}` lists the test results for the specified student, and provides the student's average score across all exams
-3. `/api/v1//exams` lists all the exams that have been recorded
+3. `/api/v1/exams` lists all the exams that have been recorded
 4. `/api/v1/exams/{number}` lists all the results for the specified exam, and provides the average score across all students
 
 #### Extending the application
