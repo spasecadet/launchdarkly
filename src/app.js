@@ -1,9 +1,18 @@
+import path from 'path';
 import express from 'express';
 import {appLogger as logger} from './lib';
 
 import api from './api/app';
 
+const staticDir = path.join(__dirname, 'static');
+
 const app = express();
+
+app.use('/static', express.static(staticDir));
+
+app.use('/', (req, res)=> {
+  res.sendFile(path.join(staticDir + '/index.html'));
+})
 
 app.use('/api', api);
 
