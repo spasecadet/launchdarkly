@@ -10,11 +10,11 @@ const app = express();
 
 app.use('/static', express.static(staticDir));
 
-app.use('/', (req, res)=> {
-  res.sendFile(path.join(staticDir + '/index.html'));
-})
-
 app.use('/api', api);
+
+app.get('/', (req, res)=> {
+  return res.sendFile(path.join(staticDir + '/index.html'));
+})
 
 app.listen(4000, (arg) => {
   logger.debug('App listening on port 4000');
