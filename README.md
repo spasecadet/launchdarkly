@@ -55,7 +55,8 @@ https://yarnpkg.com/en/docs/install
 
 Prior to running the app
 ```sh
-$ nvm use v9.0.5
+$ nvm install 9.1.0 # Node v9.x, doesn't have to be this version exactly
+$ nvm use 9.1.0
 $ yarn
 ```
 
