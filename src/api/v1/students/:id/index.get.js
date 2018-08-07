@@ -7,7 +7,7 @@ export default function (req, res) {
   db.students.getExams(studentId)
     .then((exams) => {
       res.status(200).json({
-        exam_results: _(exams).mapValues((result) => serializeExamResult(studentId, result)),
+        examResults: _(exams).mapValues((result) => serializeExamResult(studentId, result)),
         average: _(exams).chain().values().mean().value() || 0
       });
     });

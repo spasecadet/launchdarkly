@@ -8,7 +8,7 @@ describe('GET /api/v1/students/:id', function() {
       request(apiApp)
         .get('/v1/students/1')
         .expect('Content-Type', /json/)
-        .expect(200, { exam_results: {}, average: 0 }, done);
+        .expect(200, { examResults: {}, average: 0 }, done);
     });
   });
 
@@ -36,7 +36,7 @@ describe('GET /api/v1/students/:id', function() {
         .expect('Content-Type', /json/)
         .expect(200)
         .expect({
-          exam_results: {
+          examResults: {
             exam1: {studentId: "starteacherspet", score: 99.32 },
             exam2: {studentId: "starteacherspet", score: 91.01 }
           },
@@ -50,7 +50,7 @@ describe('GET /api/v1/students/:id', function() {
         .expect('Content-Type', /json/)
         .expect(200)
         .expect({
-          exam_results: {
+          examResults: {
             exam1: {studentId: "delinquent", score: 50 }
           },
           average: 50

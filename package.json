@@ -11,7 +11,7 @@
     "postinstall": "cd node_modules && ln -sF ../src/lib . && ln -sF ../src/api ."
   },
   "engines": {
-    "node": "^9.0.0",
+    "node": ">=9.0.0",
     "yarn": "^1.0.0"
   },
   "babel": {
