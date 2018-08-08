@@ -17,14 +17,15 @@ The data is exposed via the following REST API:
 #### Extending the application
 
 We'd like you to build a UI on top of the existing API, allowing a user to browse the list of exams.
-We don't expect you to be a designer, so we we're not looking for you to fill in the visual design details.
+While design is important to us,  we don't expect you to be a designer so we we're not looking for you to fill in the visual design details.
 However, we do expect you to be able to craft an intuitive and friendly user experience.
 
 We've provided a wireframe for these two views below: an exam list view and an exam detail view.
 
 ![Exams UI Wireframe](wireframe.png)
 
-There are a lot of tools, libraries, and frameworks out there these days for front-end web development.
+We primarily use React and Redux to build the LaunchDarkly front-end.
+However, there are a lot of tools, libraries, and frameworks out there these days for front-end web development, and it's our experience that good developers can easily pick up new frameworks.
 To create a more level playing field for all applicants and to allow us to more easily compare solutions, we have a few restrictions on what 3rd-party libraries can be used:
 
 * The solution only needs to work in modern browsers (one or both of latest Chrome/Firefox)
