@@ -15,7 +15,7 @@ describe('GET /api/v1/exams/:id', function() {
       request(apiApp)
         .get('/v1/exams/1')
         .expect('Content-Type', /json/)
-        .expect(200, {results: {}, average: 0}, done);
+        .expect(200, {results: [], average: 0}, done);
     });
 
     it('conforms to the schema', function(done) {
