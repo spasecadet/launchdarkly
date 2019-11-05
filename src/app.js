@@ -12,7 +12,7 @@ app.use('/static', express.static(staticDir));
 
 app.use('/api', api);
 
-app.get('/', (req, res)=> {
+app.get('*', (req, res)=> {
   return res.sendFile(path.join(staticDir + '/index.html'));
 })
 

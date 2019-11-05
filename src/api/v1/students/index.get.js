@@ -1,8 +1,11 @@
 import db from 'lib/db';
 
 export default function (req, res) {
-  db.students.getAllExams()
-    .then((exams) => {
-      res.status(200).json(exams);
+  db.students.getAllStudents()
+    .then((students) => {
+      const studentsList = students.map((student) => {
+        return {studentId: student}
+      }); 
+      res.status(200).json({ students: studentsList});
     });
 }

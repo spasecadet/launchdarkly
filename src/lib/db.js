@@ -31,14 +31,14 @@ const db = {
     });
   },
   students: {
-    getExams: (studentId) => {
-      return new Promise((resolve, reject) => {
-        resolve(db._data.students[studentId] || {});
-      });
-    },
-    getAllExams: () => {
+    getAllStudents: () => {
       return new Promise((resolve, reject) => {
         resolve(Object.keys(db._data.students));
+      });
+    },
+    getExamsForStudent: (studentId) => {
+      return new Promise((resolve, reject) => {
+        resolve(db._data.students[studentId] || {});
       });
     },
   },
@@ -48,7 +48,7 @@ const db = {
         resolve(db._data.exams);
       });
     },
-    getResults: (examId) => {
+    getExam: (examId) => {
       return new Promise((resolve, reject) => {
         resolve(db._data.exams[examId] || {});
       });

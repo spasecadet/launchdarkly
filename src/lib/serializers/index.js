@@ -3,15 +3,22 @@ export function serializeExamList(exams) {
     exams: exams ? Object.keys(exams).map(examId => {
       const exam = exams[examId];
       return {
-        id: examId,
+        examId: examId,
+        averageScore: exam.average,
         studentCount: Object.keys(exam.scores).length,
-        average: exam.average,
       };
     }) : [],
   }
 }
 
-export function serializeExamResult(studentId, score) {
+export function serializeExamResult(examId, score) {
+  return {
+    examId: examId,
+    score: score
+  }
+}
+
+export function serializeStudentResult(studentId, score) {
   return {
     studentId: studentId,
     score: score

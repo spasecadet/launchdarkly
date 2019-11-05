@@ -1,0 +1,59 @@
+@import '../../scss/colors';
+
+.academyStats {
+  display: flex;
+  height: 100%;
+}
+
+.leftMenuContainer {
+  width: 80px;
+}
+
+.contentContainer {
+  flex: 1 0 auto;
+  padding: 20px 20px 0 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.titleRowContainer {
+  display: flex;
+}
+
+.tableTitle {
+  font-size: 30px;
+  color: $primary;
+  font-weight: 100;
+  margin: 0;
+  flex: 1 0 0;
+}
+
+.average {
+  padding: 0;
+  margin: 0;
+  height: 20px;
+  flex: 1 0 0;
+  text-align: right;
+  align-self: flex-end;
+}
+
+.error {
+  margin-top: 20px;
+  color: $quaternary;
+  display: none;
+
+  &.visible {
+    display: block;
+  }
+}
+
+.statsTableContainer {
+  flex: 1 0 0;
+  overflow-y: scroll;
+  margin: 10px 0 0 0;
+  border-top: solid 1px $divider;
+
+  &.hidden {
+    display: none;
+  }
+}

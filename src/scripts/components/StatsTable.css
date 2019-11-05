@@ -1,0 +1,41 @@
+.listAsTable {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: none; }
+  .listAsTable.hidden {
+    display: none; }
+
+.tableError {
+  color: #FF309E;
+  display: none;
+  margin-top: 20px; }
+  .tableError.visible {
+    display: block; }
+
+.headerRow, .row {
+  display: flex; }
+
+.headerRow {
+  font-size: 18px; }
+
+.row {
+  border-top: 1px solid rgba(0, 0, 0, 0.1); }
+
+.colHeader, .rowItem {
+  flex: 1 0 0;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 5px 10px; }
+  .colHeader:first-child, .rowItem:first-child {
+    border: none; }
+
+.colHeader {
+  padding-top: 10px;
+  padding-bottom: 10px; }
+
+.statLink {
+  color: #8AC802;
+  text-decoration: none; }
+  .statLink:hover {
+    color: #FE9440; }

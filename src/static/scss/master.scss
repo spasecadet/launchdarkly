@@ -1,0 +1,15 @@
+@import './colors';
+
+body {
+  font-family: sans-serif;
+  color: $background;
+  margin: 0;
+}
+
+@import '../scripts/App';
+@import '../scripts/components/AcademyStats';
+@import '../scripts/components/Header';
+@import '../scripts/components/LeftMenu';
+@import '../scripts/components/ContentSelectorLink';
+@import '../scripts/components/StatsTable';
+@import '../scripts/components/Loader';

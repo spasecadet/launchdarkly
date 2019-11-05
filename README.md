@@ -72,3 +72,23 @@ $ yarn test
 ```
 
 By default the application starts up at `http://localhost:4000`
+
+---
+Notes from Tracy
+
+I'd like to cover some of the things I considered when building this.  I think this is more complex than is really warranted for this size project in terms of creating a SPA and handling everything through JS.  However, I like to make sure I'm learning something too when I work on projects like this.  I read a couple articles a while back on modern vanilla js and I wanted to try it out.  I can DEFINITELY see how the creators of React got from something very simple like this to really quickly wanting to create JSX.  I also see how you get to a virtual DOM pretty easily doing something like this.
+
+One of my early ideas was that instead of clearing out the elements from the table every time the table got new data was to reuse all the nodes that were created and only clear out empty ones and only add new nodes when I ran out of existing ones.  I thought this would be really performant, but ended up deciding it was overkill for this kind of project, especially since I was detaching the table from the DOM anyway. 
+
+I tried to keep as much of the state knowledge as possible in AcademyStats rather than letting the table decide where links should go or what to do when one was clicked.  This made it easier to handle the dependencies between StatTable and LeftMenu, and potentially makes the table more reusable (assuming it gets the same kind of data elsewhere).
+
+I modified the API to get the same data format back for each kind of request.  It made sense seeing as how I was showing data in the same format for each different type of data.  I also added some 404 responses for /exams/:id and /students/:id for when there was no matching student or exam.  True, if you waited long enough that exam or student might come around again, but it seemed like a pretty useless thing to show the user - an endless loading state.  I debated doing the same thing for /exams and /students, but that didn't cover the case when the server had just started and we're waiting for events to populate, and seems unlikely that a user would ever have to wait very long for SOME exams or students.
+
+Now that I am done with this project there are a number of things I'd like to go back and change.  The way I created the SPA would be hard to support in even the short run.  There needs to be real routing if there were to be any more types of pages, which would need to be handled at the root level.  Right now watching for browser navigation is happening inside AcademyStats since internally that's the only place where data changes.  Also it would be better to at least create a link component that could handle the link history pushstate logic a little better internally.  
+
+I'm not super pleased with the sass implementation - I didn't want to spend a long time on it and this was the fastest way to make it work, but obviously in the long term it would be better to use webpack or another task runner and only include the files that are needed when they are actually required.  At the very least it would be nice to have all the scss files picked up automatically and not have to manually add them to the master scss file.
+
+Most importantly though: I remember why we like frameworks!
+
+
+

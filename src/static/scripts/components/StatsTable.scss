@@ -1,0 +1,59 @@
+@import '../../scss/colors';
+
+.listAsTable {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  border: 1px solid $divider;
+  border-top: none;
+
+  &.hidden {
+    display: none;
+  }
+}
+
+.tableError {
+  color: $quaternary;
+  display: none;
+  margin-top: 20px;
+
+  &.visible {
+    display: block;
+  }
+}
+
+.headerRow, .row {
+  display: flex;
+}
+
+.headerRow {
+  font-size: 18px;
+}
+
+.row {
+  border-top: 1px solid $divider;
+}
+
+.colHeader, .rowItem {
+  flex: 1 0 0;
+  border-left: 1px solid $divider;
+  padding: 5px 10px;
+
+  &:first-child {
+    border: none;
+  }
+}
+
+.colHeader {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.statLink {
+  color: $tertiary;
+  text-decoration: none;
+
+  &:hover {
+    color: $secondary;
+  }
+}

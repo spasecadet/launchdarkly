@@ -1,0 +1,26 @@
+@import '../../scss/colors';
+
+.contentSelector {
+  flex: 1 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-bottom: 1px solid $divider;
+  border-right: 1px solid $divider;
+  color: $mutedText;
+  text-decoration: none;
+
+  &:hover {
+    color: $primary;
+  }
+}
+
+.selectorDetails {
+  flex: 0 0 0;
+  text-align: center;
+}
+
+.active {
+  color: $primary;
+}

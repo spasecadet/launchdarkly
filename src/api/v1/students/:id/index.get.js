@@ -4,12 +4,18 @@ import {serializeExamResult} from 'lib/serializers';
 
 export default function (req, res) {
   const studentId = req.params.id;
-  db.students.getExams(studentId)
+  db.students.getExamsForStudent(studentId)
     .then((exams) => {
-      res.status(200).json({
-        examResults: _(exams).mapValues((result) => serializeExamResult(studentId, result)),
-        average: _(exams).chain().values().mean().value() || 0
-      });
+      if (_(exams).isEmpty()) {
+        res.status(404).json({
+          message: `Student ${studentId} could not be found`,
+        });
+      } else {
+        res.status(200).json({
+          studentResults: Object.keys(exams).map((examId) => serializeExamResult(examId, exams[examId])),
+          average: _(exams).chain().values().mean().value() || 0
+        });
+      }
     });
 }
 

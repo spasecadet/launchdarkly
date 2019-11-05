@@ -1,0 +1,41 @@
+@import '../../scss/colors';
+
+$loaderDimensions: 40px;
+
+.loaderCircle {
+  display: inline-block;
+  transform: translateZ(1px);
+  position: absolute;
+  top: calc(50% - #{$loaderDimensions} / 2);
+  left: calc(50% - #{$loaderDimensions} / 2);
+
+  &.hidden {
+    display: none;
+  }
+}
+
+.loaderCircle > div {
+  display: inline-block;
+  width: $loaderDimensions;
+  height: $loaderDimensions;
+  margin: 6px;
+  border-radius: 50%;
+  background: $quaternary;
+  animation: loaderCircle 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+@keyframes loaderCircle {
+  0%, 100% {
+    animation-timing-function: cubic-bezier(0.5, 0, 1, 0.5);
+  }
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(1800deg);
+    animation-timing-function: cubic-bezier(0, 0.5, 0.5, 1);
+  }
+  100% {
+    transform: rotateY(3600deg);
+  }
+}
