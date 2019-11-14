@@ -23,6 +23,8 @@ class StatsTable {
     this.header;
     this.endpoint;
     this.linksTo;
+    this.colToSort;
+    this.isSortedAscending;
 
     // Create elements that need to be available throughout the class.
     this.loader = new Loader();
@@ -33,6 +35,7 @@ class StatsTable {
     
     // Bind `this` to class methods used outside class
     this._clickHandler = this._clickHandler.bind(this);
+    this._handleSort = this._handleSort.bind(this);
     this._render();
   }
 
@@ -52,6 +55,8 @@ class StatsTable {
   setData(headers, endpoint, linksTo) {
     this.endpoint = endpoint;
     this.linksTo = linksTo;
+    this.colToSort = null;
+    this.isSortedAscending = null;
 
     clearTimeout(this.poll);
     this._hideError();
@@ -142,8 +147,8 @@ class StatsTable {
           // If data contains 'average' pass the value to parent, otherwise pass empty string.
           const averageVal = result.average ? Math.round(result.average * 100) : '';
           this.getAverage(averageVal);
-
-          this._populateTable(rowsData);
+          this.rowsData = rowsData;
+          this._populateTable();
         }
 
         cb(result);
@@ -208,24 +213,54 @@ class StatsTable {
    */
   _createTableHeader(headers) {
     const liElement = htmlHelper.createListItemWithClass('headerRow');
-    headers.forEach((header) => {
+    headers.forEach((header, i) => {
       const textNode = htmlHelper.createTextNode(header);
       const colHeader = htmlHelper.createDivWithClass('colHeader');
-      colHeader.appendChild(textNode);
+      const sortColBtn = htmlHelper.createButtonWithClass('headerSortBtn');
+      sortColBtn.appendChild(textNode);
+      sortColBtn.onclick = this._handleSort;
+      sortColBtn.setAttribute('data-col', i);
+      colHeader.appendChild(sortColBtn);
       liElement.appendChild(colHeader);
     });
     this.header = liElement;
   }
 
   /**
+   * Sets the sort properties used for sorting table data and adds or removes 
+   * classes on header elements to show which columns are sorted.  Finally, 
+   * table data is populated which will now be sorted.
+   * 
+   * @param {Event} e 
+   */
+  _handleSort(e) {
+    const headerItem = e.target;
+    const colIndex = headerItem.getAttribute('data-col');
+    const colKeys = Object.keys(this.rowsData[0]);
+    const colToSort = colKeys[colIndex];
+    const headerElements = this.header.children;
+
+    for (let i = 0; i < headerElements.length; i++) {
+      const headerBtn = headerElements[i].children[0];
+      headerBtn.classList.remove('sortedAscending', 'sortedDescending');
+    }
+
+    // determine if the sort value is currently ascending or descending
+    this.isSortedAscending = colToSort === this.sortedCol ? !this.isSortedAscending : true;
+    this.sortedCol = colToSort;
+
+    headerItem.classList.add(this.isSortedAscending ? 'sortedAscending' : 'sortedDescending');
+    
+    this._populateTable();
+  }
+
+  /**
    * Create all the li rows for the table and append them to the list/table. As
    * opposed to this._createTableHeader here we don't need to store the list of 
    * li elements for later since the table data is always created from scratch.
-   * 
-   * @param {[Object]} rowsData 
    */
-  _createRows(rowsData) {
-    rowsData.forEach((row) => {
+  _createRows() {
+    this.rowsData.forEach((row) => {
       const liElement = htmlHelper.createListItemWithClass('row');
       let counter = 0;
       for (let val in row) {
@@ -254,17 +289,33 @@ class StatsTable {
   }
 
   /**
-   * Given data for the table rows, remove existing children, append the 
-   * header row, create and append all the data rows, then reattach the 
-   * table to the DOM.
-   * 
-   * @param {[Object]} rowsData 
+   * Remove existing children from the tableand append the header row. If there 
+   * is a column specified to sort by in this.sortedCol then sort the table 
+   * data, otherwise leave it as received from backend.  Create and append all 
+   * the data rows, then reattach the table to the DOM.
    */
-  _populateTable(rowsData) {
+  _populateTable() {
     this._emptyTable();
     this.statsTable.appendChild(this.header);
-    this._createRows(rowsData);
+    if (this.sortedCol) {
+      this._sortRowsData();
+    }
+    this._createRows();
     this._attachTable();
+  }
+
+
+  /**
+   * Sort the table data by this.sortCol, ascending or descending.
+   */
+  _sortRowsData() {
+    this.rowsData.sort((a, b) => {
+      if (this.isSortedAscending) {
+        return a[this.sortedCol] - b[this.sortedCol];
+      }
+
+      return b[this.sortedCol] - a[this.sortedCol];
+    });
   }
 
   /**

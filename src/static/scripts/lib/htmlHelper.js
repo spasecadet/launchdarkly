@@ -20,6 +20,7 @@ const htmlHelper = {
    * 
    * eg:
    * createSpanWithTextAndClass('Some Text', 'left');
+   * produces
    * <span class="left">Some Text</span>
    *
    * @param {String} text
@@ -39,6 +40,7 @@ const htmlHelper = {
    * 
    * eg:
    * createDivWithClass('left');
+   * produces
    * <div class="left"></div>
    * 
    * @param {String} className
@@ -56,6 +58,7 @@ const htmlHelper = {
    * 
    * eg: 
    * createDivWithTextAndClass('Floopy Noopers', 'rm');
+   * produces
    * <div class="rm">Floopy Noopers</div>
    * 
    * @param {String} text
